@@ -26,10 +26,12 @@ public class BankManagementApplication {
 
             switch (n) {
                 case 1:
-                    registerCustomer();
+                    System.out.println("Customer Added with Customer id " + registerCustomer());
                     break;
                 case 2:
-                    showCustomerDetails();
+                    System.out.println("Enter Customer Id");
+                    int c_id=sc.nextInt();
+                    showCustomerDetails(c_id);
                     break;
                 case 3:
                     System.out.println("Enter Customer Id");
@@ -39,11 +41,13 @@ public class BankManagementApplication {
                         System.out.println("Enter Valid Customer Id");
                     }
                         else {
-                        createAccount(customerId);
+                        System.out.println("Account Added with Account id " +  createAccount(customerId));
                     }
                         break;
                 case 4:
-                    showAccounrDetails();
+                    System.out.println("Enter Customer Id");
+                    int cust_id=sc.nextInt();
+                    showAccountDetails(cust_id);
                     break;
                 case 5:
                     running = false;
@@ -54,32 +58,7 @@ public class BankManagementApplication {
             }
         }
     }
-
-    private static void showAccounrDetails() {
-        for(Account account:accountList)
-        {
-            System.out.println("Account Number:"+account.getAccountNumber());
-            System.out.println("Account Type:"+account.getAccountType());
-            System.out.println("opened Date: "+account.getOpenedDate());
-            System.out.println("Balance: "+account.getBalance());
-            System.out.println();
-        }
-    }
-
-    private static void showCustomerDetails() {
-
-        for(Customer customer:customerList)
-        {
-            System.out.println("Customer Id:"+customer.getId());
-            System.out.println("Name:"+customer.getName());
-            System.out.println("Age: "+customer.getAge());
-            System.out.println("Mobile: "+customer.getMobileNumber());
-            System.out.println();
-            System.out.println();
-        }
-    }
-
-    private static void registerCustomer() {
+    private static int registerCustomer() {
         Scanner sc =new Scanner(System.in);
         System.out.println("Enter Name");
         String name=sc.nextLine();
@@ -92,16 +71,57 @@ public class BankManagementApplication {
         Customer customer=new Customer(++i,name,age,mobile) ;
 
         customerList.add(customer);
+        return i;
     }
-    private static void createAccount(int customerId) {
+
+    private static void showCustomerDetails(int customer_Id) {
+
+        for(Customer customer:customerList)
+        {
+            if(customer_Id==customer.getId())
+            {
+                System.out.println("Customer Id:" + customer.getId());
+                System.out.println("Name:" + customer.getName());
+                System.out.println("Age: " + customer.getAge());
+                System.out.println("Mobile: " + customer.getMobileNumber());
+                System.out.println();
+                System.out.println();
+            }
+            else
+            {
+                System.out.println("Enter valid  customer Id");
+            }
+        }
+    }
+
+    private static String createAccount(int customerId) {
         String accountNumber=CreateAccountNumber();
+        String now=setDate().toString();
         System.out.println("Which Type of Account you want (current/saving/salary)  ");
         Scanner sc=new Scanner(System.in);
         String x=sc.nextLine();
         System.out.println("Enter Deposit Amount");
         int n=sc.nextInt();
-           Account account=new Account(accountNumber,x,n,"10042023",true);
+           Account account=new Account(customerId,accountNumber,x,n,now,true);
            accountList.add(account);
+           return accountNumber;
+    }
+    private static void showAccountDetails(int cust_Id) {
+
+        for(Account account:accountList)
+        {
+            if(cust_Id== account.getId()) {
+                System.out.println("Account Number:" + account.getAccountNumber());
+                System.out.println("Account Type:" + account.getAccountType());
+                System.out.println("opened Date: " + account.getOpenedDate());
+                System.out.println("Balance: " + account.getBalance());
+                System.out.println();
+            }
+            else
+            {
+                System.out.println("Enter Valid Customer Id");
+            }
+        }
     }
 
     private static String CreateAccountNumber() {
@@ -111,5 +131,10 @@ public class BankManagementApplication {
         String a = now.toString().replaceAll("[^0-9]", "");
         String accountNumber=a.substring(0,16)+String.format("%04d", randomNum);
         return accountNumber;
+    }
+    public static LocalDateTime setDate()
+    {
+        LocalDateTime now = LocalDateTime.now();
+        return now;
     }
 }
