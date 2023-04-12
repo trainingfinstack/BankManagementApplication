@@ -95,7 +95,7 @@ public class BankManagementApplication {
     }
 
     private static String createAccount(int customerId) {
-        String accountNumber=CreateAccountNumber();
+        String accountNumber=createAccountNumber();
         String now=setDate().toString();
         System.out.println("Which Type of Account you want (current/saving/salary)  ");
         Scanner sc=new Scanner(System.in);
@@ -124,7 +124,7 @@ public class BankManagementApplication {
         }
     }
 
-    private static String CreateAccountNumber() {
+    private static String createAccountNumber() {
         LocalDateTime now = LocalDateTime.now();
         Random rand = new Random();
         int randomNum = rand.nextInt(9999);
