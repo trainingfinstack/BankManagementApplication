@@ -4,8 +4,10 @@ import customerRegistration.coreJava.src.main.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -114,13 +116,24 @@ public class BankManagementApplication {
         System.out.println("Enter Customer Id");
         Scanner sc=new Scanner(System.in);
         int customer_Id = sc.nextInt();
-        Session session = sessionFactory.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-        Account account = session.get(Account.class,customer_Id);
-        System.out.println(account);
-        tx.commit();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        Query<Account> query = session.createQuery("FROM Account WHERE customerid = :customerId", Account.class);
+        query.setParameter("customerId", customer_Id);
+        List<Account> accounts = query.list();
 
+        System.out.println("Accounts Details:");
+        for (Account account : accounts) {
+            System.out.println("Account Number: " + account.getAccountNumber());
+            System.out.println("Customer ID: " + account.getCustomerId());
+            System.out.println("Account Type: " + account.getAccountType());
+            System.out.println("Balance: " + account.getBalance());
+            System.out.println("Opened Date: " + account.getOpenedDate());
+            System.out.println("Active Status: " + account.isActiveStatus());
+            System.out.println("------------------------------------");
+        }
 
+        transaction.commit();
     }
 
     private static String createAccountNumber() {

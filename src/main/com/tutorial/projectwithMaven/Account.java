@@ -8,8 +8,8 @@ import javax.persistence.Id;
 @Entity
 @Table(name="Account")
 public class Account {
-     String accountNumber;
-    @Id int customerid;
+    @Id  String accountNumber;
+    int customerid;
 String accountType;
 int Balance;
 String openedDate;
@@ -26,7 +26,7 @@ boolean activeStatus;
 
     public Account() {
     }
-    public int getId() {
+    public int getCustomerId() {
         return customerid;
     }
     public String getAccountNumber() {
@@ -44,6 +44,10 @@ boolean activeStatus;
 
     public String getOpenedDate() {
         return openedDate;
+    }
+
+    public boolean isActiveStatus() {
+        return activeStatus;
     }
 
     public void setCustomerid(int customerid) {
