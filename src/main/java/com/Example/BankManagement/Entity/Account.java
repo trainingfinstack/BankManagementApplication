@@ -1,14 +1,13 @@
-package customerRegistration.coreJava.src.main.com.tutorial.projectwithMaven;
+package com.Example.BankManagement.Entity;
 
-import javax.persistence.Table;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name="Account")
 public class Account {
-    @Id  String accountNumber;
+  @Id
+  String accountNumber;
     int customerid;
 String accountType;
 int Balance;

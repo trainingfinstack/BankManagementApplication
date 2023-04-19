@@ -1,15 +1,14 @@
-package customerRegistration.coreJava.src.main.com.tutorial.projectwithMaven;
+package com.Example.BankManagement.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class Customer {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    int id;
+
+   @Id
+   int id;
     String name;
     int age;
     String mobile;
