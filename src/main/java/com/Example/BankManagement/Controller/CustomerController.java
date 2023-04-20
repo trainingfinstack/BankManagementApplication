@@ -16,8 +16,8 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("/details")
-    public ResponseEntity<Optional<Customer>> getCustomerDetails(@RequestBody Customer id) {
-        Optional<Customer> customers = customerService.getCustomerDetails(id.getId());
+    public ResponseEntity<Customer> getCustomerDetails(@RequestBody Customer id) {
+        Customer customers = customerService.getCustomerDetailsById(id.getId());
         return ResponseEntity.ok(customers);
     }
 }

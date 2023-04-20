@@ -12,7 +12,7 @@ import java.util.Optional;
 public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
-    public Optional<Customer> getCustomerDetails(int id) {
+    public Customer getCustomerDetailsById(int id) {
        return customerRepository.getCustomerDetailsById(id);
     }
 }
