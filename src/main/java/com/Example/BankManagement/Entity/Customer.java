@@ -14,11 +14,11 @@ public class Customer {
     String mobile;
 
 
-    Customer() {
+    public Customer() {
 
     }
 
-    Customer(int id, String name,int age, String mobile) {
+    public Customer(int id, String name,int age, String mobile) {
         this.id = id;
         this.name = name;
         this.age = age;
