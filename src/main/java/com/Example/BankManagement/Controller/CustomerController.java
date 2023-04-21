@@ -3,6 +3,7 @@ package com.Example.BankManagement.Controller;
 import com.Example.BankManagement.Entity.Customer;
 import com.Example.BankManagement.Service.CustomerService;
 import com.Example.BankManagement.request.CustomerRequest;
+import com.Example.BankManagement.request.CustomerRequestById;
 import com.Example.BankManagement.response.CustomerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,8 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("/details")
-    public ResponseEntity<Customer> getCustomerDetails(@RequestBody Customer id) {
-        Customer customers = customerService.getCustomerDetailsById(id.getId());
+    public ResponseEntity<Customer> getCustomerDetails(@RequestBody CustomerRequestById req) {
+        Customer customers = customerService.getCustomerDetailsById(req.getId());
         return ResponseEntity.ok(customers);
     }
     @PostMapping("/add")
